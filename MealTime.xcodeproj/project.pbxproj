@@ -19,6 +19,7 @@
 		5240648C1FA3BE0900B748DB /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 524064831FA3BDFC00B748DB /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5240648F1FA3C48B00B748DB /* RestoListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5240648E1FA3C48B00B748DB /* RestoListItemCell.swift */; };
 		524064911FA3C55900B748DB /* RestoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524064901FA3C55900B748DB /* RestoListViewController.swift */; };
+		5240649A1FA3CC4E00B748DB /* RestaurantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524064991FA3CC4E00B748DB /* RestaurantModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,7 @@
 		524064831FA3BDFC00B748DB /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		5240648E1FA3C48B00B748DB /* RestoListItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestoListItemCell.swift; sourceTree = "<group>"; };
 		524064901FA3C55900B748DB /* RestoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestoListViewController.swift; sourceTree = "<group>"; };
+		524064991FA3CC4E00B748DB /* RestaurantModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +87,11 @@
 		5240646C1FA3BA7F00B748DB /* MealTime */ = {
 			isa = PBXGroup;
 			children = (
+				524064961FA3CBE700B748DB /* Model */,
+				524064981FA3CC1900B748DB /* View */,
+				524064971FA3CBEE00B748DB /* Controller */,
 				524064711FA3BA7F00B748DB /* Main.storyboard */,
-				524064901FA3C55900B748DB /* RestoListViewController.swift */,
-				5240648E1FA3C48B00B748DB /* RestoListItemCell.swift */,
+				524064951FA3CBDA00B748DB /* TableViewCells */,
 				5240647F1FA3BA8F00B748DB /* Supporting Files */,
 			);
 			path = MealTime;
@@ -112,6 +116,37 @@
 				524064831FA3BDFC00B748DB /* SwiftyJSON.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		524064951FA3CBDA00B748DB /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				5240648E1FA3C48B00B748DB /* RestoListItemCell.swift */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		524064961FA3CBE700B748DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				524064991FA3CC4E00B748DB /* RestaurantModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		524064971FA3CBEE00B748DB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				524064901FA3C55900B748DB /* RestoListViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		524064981FA3CC1900B748DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +225,7 @@
 			files = (
 				5240648F1FA3C48B00B748DB /* RestoListItemCell.swift in Sources */,
 				524064911FA3C55900B748DB /* RestoListViewController.swift in Sources */,
+				5240649A1FA3CC4E00B748DB /* RestaurantModel.swift in Sources */,
 				5240646E1FA3BA7F00B748DB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
