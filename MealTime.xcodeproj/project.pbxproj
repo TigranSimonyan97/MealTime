@@ -8,20 +8,47 @@
 
 /* Begin PBXBuildFile section */
 		5240646E1FA3BA7F00B748DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5240646D1FA3BA7F00B748DB /* AppDelegate.swift */; };
-		524064701FA3BA7F00B748DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5240646F1FA3BA7F00B748DB /* ViewController.swift */; };
 		524064731FA3BA7F00B748DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 524064711FA3BA7F00B748DB /* Main.storyboard */; };
 		524064751FA3BA7F00B748DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 524064741FA3BA7F00B748DB /* Assets.xcassets */; };
 		524064781FA3BA7F00B748DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 524064761FA3BA7F00B748DB /* LaunchScreen.storyboard */; };
+		524064851FA3BDFC00B748DB /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524064821FA3BDFC00B748DB /* AlamofireImage.framework */; };
+		524064861FA3BDFC00B748DB /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524064831FA3BDFC00B748DB /* SwiftyJSON.framework */; };
+		524064871FA3BE0900B748DB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 524064811FA3BDFC00B748DB /* Alamofire.framework */; };
+		524064881FA3BE0900B748DB /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 524064811FA3BDFC00B748DB /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5240648A1FA3BE0900B748DB /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 524064821FA3BDFC00B748DB /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5240648C1FA3BE0900B748DB /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 524064831FA3BDFC00B748DB /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5240648F1FA3C48B00B748DB /* RestoListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5240648E1FA3C48B00B748DB /* RestoListItemCell.swift */; };
+		524064911FA3C55900B748DB /* RestoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524064901FA3C55900B748DB /* RestoListViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5240648D1FA3BE0900B748DB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				524064881FA3BE0900B748DB /* Alamofire.framework in Embed Frameworks */,
+				5240648A1FA3BE0900B748DB /* AlamofireImage.framework in Embed Frameworks */,
+				5240648C1FA3BE0900B748DB /* SwiftyJSON.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5240646A1FA3BA7F00B748DB /* MealTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MealTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5240646D1FA3BA7F00B748DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5240646F1FA3BA7F00B748DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		524064721FA3BA7F00B748DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		524064741FA3BA7F00B748DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		524064771FA3BA7F00B748DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		524064791FA3BA7F00B748DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		524064811FA3BDFC00B748DB /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		524064821FA3BDFC00B748DB /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = Carthage/Build/iOS/AlamofireImage.framework; sourceTree = "<group>"; };
+		524064831FA3BDFC00B748DB /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		5240648E1FA3C48B00B748DB /* RestoListItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestoListItemCell.swift; sourceTree = "<group>"; };
+		524064901FA3C55900B748DB /* RestoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestoListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +56,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				524064851FA3BDFC00B748DB /* AlamofireImage.framework in Frameworks */,
+				524064861FA3BDFC00B748DB /* SwiftyJSON.framework in Frameworks */,
+				524064871FA3BE0900B748DB /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +70,7 @@
 			children = (
 				5240646C1FA3BA7F00B748DB /* MealTime */,
 				5240646B1FA3BA7F00B748DB /* Products */,
+				524064801FA3BDFB00B748DB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +85,33 @@
 		5240646C1FA3BA7F00B748DB /* MealTime */ = {
 			isa = PBXGroup;
 			children = (
-				5240646D1FA3BA7F00B748DB /* AppDelegate.swift */,
-				5240646F1FA3BA7F00B748DB /* ViewController.swift */,
 				524064711FA3BA7F00B748DB /* Main.storyboard */,
+				524064901FA3C55900B748DB /* RestoListViewController.swift */,
+				5240648E1FA3C48B00B748DB /* RestoListItemCell.swift */,
+				5240647F1FA3BA8F00B748DB /* Supporting Files */,
+			);
+			path = MealTime;
+			sourceTree = "<group>";
+		};
+		5240647F1FA3BA8F00B748DB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5240646D1FA3BA7F00B748DB /* AppDelegate.swift */,
 				524064741FA3BA7F00B748DB /* Assets.xcassets */,
 				524064761FA3BA7F00B748DB /* LaunchScreen.storyboard */,
 				524064791FA3BA7F00B748DB /* Info.plist */,
 			);
-			path = MealTime;
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		524064801FA3BDFB00B748DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				524064811FA3BDFC00B748DB /* Alamofire.framework */,
+				524064821FA3BDFC00B748DB /* AlamofireImage.framework */,
+				524064831FA3BDFC00B748DB /* SwiftyJSON.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +124,7 @@
 				524064661FA3BA7F00B748DB /* Sources */,
 				524064671FA3BA7F00B748DB /* Frameworks */,
 				524064681FA3BA7F00B748DB /* Resources */,
+				5240648D1FA3BE0900B748DB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -137,7 +188,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				524064701FA3BA7F00B748DB /* ViewController.swift in Sources */,
+				5240648F1FA3C48B00B748DB /* RestoListItemCell.swift in Sources */,
+				524064911FA3C55900B748DB /* RestoListViewController.swift in Sources */,
 				5240646E1FA3BA7F00B748DB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +314,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7RFWDT5WSW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MealTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tigranakert.MealTime;
@@ -275,6 +331,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7RFWDT5WSW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MealTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tigranakert.MealTime;
@@ -302,6 +362,7 @@
 				5240647E1FA3BA7F00B748DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
