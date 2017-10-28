@@ -45,6 +45,4 @@ struct RestaurantModel {
         rating = json["rating"] as? Double ?? 0.0
         
     }
-    
-    
 }

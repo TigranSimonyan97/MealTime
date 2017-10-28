@@ -12,10 +12,13 @@ import AlamofireImage
 
 class RestoListViewController: UITableViewController {
     
-   
+    //Server URL
+    let url = "http://360buking.azurewebsites.net/api/Data/AM/Restaurants/GetAll"
+    
     //Properties
     var restaurants: [RestaurantModel] = []
-    let url = "http://360buking.azurewebsites.net/api/Data/AM/Restaurants/GetAll"
+    var restaurant: RestaurantModel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,15 +48,37 @@ class RestoListViewController: UITableViewController {
         return tableView.frame.width / (320/230)
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.restaurant = restaurants[indexPath.row]
+        self.performSegue(withIdentifier: "showRestoDetail", sender: self)
+        print("Table View Cell")
+        print(restaurant)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
+        
+        if segue.identifier == "showRestoDetail"{
+            let destinationController = segue.destination as! RestaurantDetailViewController
+                
+                destinationController.restaurant = self.restaurant
+            print("Works")
+        }
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestoLIstItemCell", for: indexPath) as! RestoListItemCell
         
-        cell.restoPhotoImage.image = UIImage(named: "football")
         cell.restoNameLbl.text = self.restaurants[indexPath.row].name
         cell.restoLocationLbl.text = self.restaurants[indexPath.row].address
-        cell.restoTypeLbl.text = "Resto No \(indexPath.row) type"
         
+        if self.restaurants[indexPath.row].isOpen{
+            cell.restoTypeLbl.text = "Open"
+        }else{
+            cell.restoTypeLbl.text = "Closed"
+        }
         
+        //Set Restaurant image
         let imageURL = self.restaurants[indexPath.row].mainImgLink
         let url = URL(string: imageURL)
         
@@ -63,7 +88,7 @@ class RestoListViewController: UITableViewController {
         return cell
     }
     
-    
+    //Get restaurants from server
     func getRestaurants(){
         Alamofire.request(url).responseJSON{response in
             
