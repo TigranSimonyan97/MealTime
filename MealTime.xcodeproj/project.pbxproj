@@ -75,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				5240646C1FA3BA7F00B748DB /* MealTime */,
+				524064711FA3BA7F00B748DB /* Main.storyboard */,
 				5240646B1FA3BA7F00B748DB /* Products */,
 				524064801FA3BDFB00B748DB /* Frameworks */,
 			);
@@ -94,7 +95,6 @@
 				524064961FA3CBE700B748DB /* Model */,
 				524064981FA3CC1900B748DB /* View */,
 				524064971FA3CBEE00B748DB /* Controller */,
-				524064711FA3BA7F00B748DB /* Main.storyboard */,
 				524064951FA3CBDA00B748DB /* TableViewCells */,
 				5240647F1FA3BA8F00B748DB /* Supporting Files */,
 			);
@@ -247,6 +247,7 @@
 				524064721FA3BA7F00B748DB /* Base */,
 			);
 			name = Main.storyboard;
+			path = MealTime;
 			sourceTree = "<group>";
 		};
 		524064761FA3BA7F00B748DB /* LaunchScreen.storyboard */ = {

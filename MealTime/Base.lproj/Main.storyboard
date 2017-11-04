@@ -104,76 +104,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9YP-LF-trs">
-                                <rect key="frame" x="0.0" y="339" width="375" height="234"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NKV-Nt-ZXP">
+                                <rect key="frame" x="0.0" y="64" width="375" height="267"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Of1-aE-c5t">
+                                <rect key="frame" x="0.0" y="335" width="375" height="216"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailCell" id="w4p-Jc-a5Z" customClass="RestaurantDetailCell" customModule="MealTime" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RestaurantDetailCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RestaurantDetailCell" id="yy4-rr-oTX" customClass="RestaurantDetailCell" customModule="MealTime" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w4p-Jc-a5Z" id="IKt-5Y-77N">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yy4-rr-oTX" id="3tS-Uo-5cv">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="U8Q-b4-szc">
-                                                    <rect key="frame" x="8" y="12.5" width="359" height="20.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIh-td-vLc">
+                                                    <rect key="frame" x="16" y="12" width="343" height="20.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9RC-O2-MQj">
-                                                            <rect key="frame" x="0.0" y="0.0" width="116.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJI-ji-ZHK">
+                                                            <rect key="frame" x="0.0" y="0.0" width="114.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15S-rL-OJc">
-                                                            <rect key="frame" x="126.5" y="0.0" width="232.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxk-xz-wnp">
+                                                            <rect key="frame" x="114.5" y="0.0" width="228.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="15S-rL-OJc" firstAttribute="width" secondItem="9RC-O2-MQj" secondAttribute="width" multiplier="2" id="yVH-PN-15Q"/>
+                                                        <constraint firstItem="cxk-xz-wnp" firstAttribute="width" secondItem="cJI-ji-ZHK" secondAttribute="width" multiplier="2" id="hNm-8t-hw5"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="U8Q-b4-szc" secondAttribute="trailing" id="Anj-L5-5uc"/>
-                                                <constraint firstItem="U8Q-b4-szc" firstAttribute="centerY" secondItem="IKt-5Y-77N" secondAttribute="centerY" id="BXf-y2-rpH"/>
-                                                <constraint firstItem="U8Q-b4-szc" firstAttribute="leading" secondItem="IKt-5Y-77N" secondAttribute="leadingMargin" id="LMB-Hx-5dv"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="tIh-td-vLc" secondAttribute="trailing" constant="8" id="Dre-cA-OYg"/>
+                                                <constraint firstItem="tIh-td-vLc" firstAttribute="top" secondItem="3tS-Uo-5cv" secondAttribute="topMargin" constant="4" id="pXD-4X-ljo"/>
+                                                <constraint firstItem="tIh-td-vLc" firstAttribute="leading" secondItem="3tS-Uo-5cv" secondAttribute="leadingMargin" constant="8" id="twi-hx-DHm"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="nameLbl" destination="9RC-O2-MQj" id="08H-Qp-rdB"/>
-                                            <outlet property="valueLbl" destination="15S-rL-OJc" id="SUv-3r-etk"/>
+                                            <outlet property="nameLbl" destination="cJI-ji-ZHK" id="hZ0-AE-BW3"/>
+                                            <outlet property="valueLbl" destination="cxk-xz-wnp" id="c34-Nx-ERt"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="HXS-mK-1am" id="Ref-yK-Hru"/>
+                                    <outlet property="delegate" destination="HXS-mK-1am" id="XAO-lw-uF6"/>
+                                </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NKV-Nt-ZXP">
-                                <rect key="frame" x="0.0" y="64" width="375" height="267"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="UJ1-Vn-Nol" firstAttribute="top" secondItem="9YP-LF-trs" secondAttribute="bottom" constant="94" id="0LX-Wt-doS"/>
+                            <constraint firstItem="Of1-aE-c5t" firstAttribute="top" secondItem="NKV-Nt-ZXP" secondAttribute="bottom" constant="4" id="4ER-zQ-mFb"/>
                             <constraint firstAttribute="trailing" secondItem="NKV-Nt-ZXP" secondAttribute="trailing" id="6Il-mC-NZV"/>
+                            <constraint firstItem="Of1-aE-c5t" firstAttribute="leading" secondItem="NKV-Nt-ZXP" secondAttribute="leading" id="CZF-yj-A0Q"/>
                             <constraint firstItem="NKV-Nt-ZXP" firstAttribute="height" secondItem="iFz-Ph-8Fz" secondAttribute="height" multiplier="0.4" id="Iw6-HG-ksy"/>
-                            <constraint firstItem="9YP-LF-trs" firstAttribute="leading" secondItem="NKV-Nt-ZXP" secondAttribute="leading" id="dCC-Wf-yYV"/>
+                            <constraint firstItem="UJ1-Vn-Nol" firstAttribute="top" secondItem="Of1-aE-c5t" secondAttribute="bottom" constant="116" id="quy-NB-xg3"/>
                             <constraint firstItem="NKV-Nt-ZXP" firstAttribute="top" secondItem="YZv-DE-1jc" secondAttribute="bottom" id="u1c-OK-jIb"/>
                             <constraint firstItem="NKV-Nt-ZXP" firstAttribute="leading" secondItem="iFz-Ph-8Fz" secondAttribute="leading" id="waI-HD-3uO"/>
-                            <constraint firstItem="9YP-LF-trs" firstAttribute="top" secondItem="NKV-Nt-ZXP" secondAttribute="bottom" constant="8" id="yJ0-iC-bCs"/>
-                            <constraint firstItem="9YP-LF-trs" firstAttribute="trailing" secondItem="NKV-Nt-ZXP" secondAttribute="trailing" id="yRn-xf-gga"/>
+                            <constraint firstItem="Of1-aE-c5t" firstAttribute="trailing" secondItem="NKV-Nt-ZXP" secondAttribute="trailing" id="wdR-5I-bCc"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="restoInfoTableView" destination="9YP-LF-trs" id="zGK-XE-mfy"/>
+                        <outlet property="restoInfoTableView" destination="Of1-aE-c5t" id="6nw-Ne-zbz"/>
                         <outlet property="restoPhotoImg" destination="NKV-Nt-ZXP" id="rnU-hp-lOt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ee-NQ-vaC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1780" y="53"/>
+            <point key="canvasLocation" x="1780" y="52.623688155922046"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="b9f-ZE-3yy">

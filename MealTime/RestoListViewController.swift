@@ -57,8 +57,6 @@ class RestoListViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        
-        
         if segue.identifier == "showRestoDetail"{
             let destinationController = segue.destination as! RestaurantDetailViewController
                 

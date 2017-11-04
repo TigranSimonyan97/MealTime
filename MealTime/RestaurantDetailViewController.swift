@@ -26,9 +26,10 @@ class RestaurantDetailViewController: UIViewController{
         
         self.title = restaurant.name
         self.navigationController?.navigationBar.tintColor = UIColor.black
-        
-        restoInfoTableView.delegate = self
-        restoInfoTableView.dataSource = self
+
+//        
+//        restoInfoTableView.delegate = self
+//        restoInfoTableView.dataSource = self
         
         let imageURL = restaurant.mainImgLink
         let url = URL(string: imageURL)
