@@ -8,41 +8,22 @@
 
 import Foundation
 
-struct RestaurantModel {
-   
-    
-    var id: Int = 0
+struct RestaurantModel
+{
     var name: String
-    var logoLink: String
-    var mainImgLink:String
-    var cost: String
-    var city: String
-    var address: String
-    var isOpen24: Bool
-    var openingTime: String?
-    var closingTime: String?
-    var additionalOpeningTime: String?
-    var additionalClosingTime: String?
-    var isOpen: Bool
-    var ratedCount: Int
-    var rating: Double
+    var type: String
+    var location: String
+    var image: String
+    var isVisited: Bool
+    var phone: String
+    var rating: String = ""
     
-    init(json: [String : Any]) {
-        id = json["id"] as? Int ?? 0
-        name = json["name"] as? String ?? ""
-        logoLink = json["logoLink"] as? String ?? ""
-        mainImgLink = json["mainImgLink"] as? String ?? ""
-        cost = json["cost"] as? String ?? ""
-        city = json["city"] as? String ?? ""
-        address = json["address"] as? String ?? ""
-        isOpen24 = json["isOpen24"] as? Bool ?? false
-        openingTime = json["openingTime"] as? String ?? nil
-        closingTime = json["closingTime"] as? String ?? nil
-        additionalOpeningTime = json["additionalOpeningTime"] as? String ?? nil
-        additionalClosingTime = json["additionalClosingTime"] as? String ?? nil
-        isOpen = json["isOpen"] as? Bool ?? false
-        ratedCount = json["ratedCount"] as? Int ?? 0
-        rating = json["rating"] as? Double ?? 0.0
-        
+    init(name: String, type: String, location: String, phone: String, image: String, isVisited: Bool){
+        self.name = name
+        self.type = type
+        self.location = location
+        self.image = image
+        self.isVisited = isVisited
+        self.phone = phone
     }
 }
