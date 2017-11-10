@@ -91,7 +91,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="qy2-v8-9wx" id="JrL-Tl-N0T"/>
+                        <outlet property="tableView" destination="qy2-v8-9wx" id="emG-Cn-MhA"/>
                         <segue destination="HXS-mK-1am" kind="show" identifier="showRestoDetail" id="GiR-RB-UzU"/>
                     </connections>
                 </tableViewController>
@@ -117,12 +117,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoalbum" translatesAutoresizingMaskIntoConstraints="NO" id="xsD-XL-adr">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoalbum" translatesAutoresizingMaskIntoConstraints="NO" id="xsD-XL-adr">
                                                     <rect key="frame" x="155" y="93" width="64" height="64"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="64" id="6o6-tD-IMp"/>
-                                                        <constraint firstAttribute="width" constant="64" id="GaA-lG-ADA"/>
-                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -207,7 +203,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Restaurant Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HuL-Fx-d66">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Restaurant Location (30 Abovyan str., Yerevan)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HuL-Fx-d66">
                                                     <rect key="frame" x="8" y="33" width="339" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="339" id="6bh-8k-BDc"/>
@@ -274,8 +270,8 @@
                             </tableViewSection>
                         </sections>
                         <connections>
-                            <outlet property="dataSource" destination="k9M-Ft-uso" id="Pkp-4U-sI2"/>
-                            <outlet property="delegate" destination="k9M-Ft-uso" id="9Gk-z7-Uq9"/>
+                            <outlet property="dataSource" destination="k9M-Ft-uso" id="v3Q-7A-Ozu"/>
+                            <outlet property="delegate" destination="k9M-Ft-uso" id="CbC-pL-0cb"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Restaurant" id="S0p-Uz-62g">

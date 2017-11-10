@@ -16,15 +16,15 @@ class ReviewViewController: UIViewController {
     
     @IBOutlet weak var restaurantPhotoImageView: UIImageView!
     //Properties
-    var restaurantImageName: String!
+    var restaurantImageName: Data!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //Set images for background image and restaurant image
-        backgroundImage.image = UIImage(named: restaurantImageName)
-        restaurantPhotoImageView.image = UIImage(named:restaurantImageName)
+        backgroundImage.image = UIImage(data: restaurantImageName)
+        restaurantPhotoImageView.image = UIImage(data: restaurantImageName)
         
         
         //Prepearing for animation

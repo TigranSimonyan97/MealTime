@@ -16,7 +16,7 @@ class MapViewController: UIViewController,MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     //Properties
-    var restaurant:RestaurantModel!
+    var restaurant: Restaurant!
     var location: CLLocation!
     let radius: CLLocationDistance = 2500
     
@@ -48,7 +48,7 @@ class MapViewController: UIViewController,MKMapViewDelegate {
         }
         
         let restaurantImageForAnnotation = UIImageView(frame: CGRect.init(x: 0.0, y: 0.0, width: 53, height: 53))
-        restaurantImageForAnnotation.image = UIImage(named: restaurant.image)
+        restaurantImageForAnnotation.image = UIImage(data: (restaurant.image as Data?)!)
         annotationView?.leftCalloutAccessoryView = restaurantImageForAnnotation
         
         return annotationView

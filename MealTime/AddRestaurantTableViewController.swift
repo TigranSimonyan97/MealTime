@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddRestaurantTableViewController: UITableViewController
 {
@@ -26,24 +27,40 @@ class AddRestaurantTableViewController: UITableViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       navigationController?.navigationBar.backgroundColor = UIColor.darkGray
+        
+        navigationController?.navigationBar.backgroundColor = UIColor.darkGray
+        
+        let handler = UITapGestureRecognizer(target: self, action: #selector(imagePickerCellTouchUP(_:)))
+        chosenPhotoImageView.addGestureRecognizer(handler)
+        
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-                let imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.allowsEditing = false
-                imagePicker.sourceType = .photoLibrary
-                
-                present(imagePicker, animated: true, completion: nil)
-            }
-        }
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.row == 0 {
+//            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+//                let imagePicker = UIImagePickerController()
+//                imagePicker.allowsEditing = false
+//                imagePicker.sourceType = .photoLibrary
+//                
+//                present(imagePicker, animated: true, completion: nil)
+//            }
+//        }
+//    }
+//    
+    
     
     //MARK:  Actions
+    
+    @IBAction func imagePickerCellTouchUP(_ sender: UITapGestureRecognizer) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = .photoLibrary
+            
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
     
     @IBAction func isVisitedButtonTouchUp(sender: UIButton) {
         
@@ -64,7 +81,31 @@ class AddRestaurantTableViewController: UITableViewController
     @IBAction func saveButtonTouchUp(_ sender: UIBarButtonItem){
         if restaurantNameTextField.text != "" ,
              restaurantTypeTextField.text != "" , restaurantLocationTextField.text != "" {
-            print("Name is:\(restaurantNameTextField.text),Type is: \(restaurantTypeTextField.text), Location is: \(restaurantLocationTextField.text)")
+            
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            let context = appDelegate?.persistentContainer.viewContext
+            
+            let restaurant = NSEntityDescription.insertNewObject(forEntityName: "Restaurant", into: context!) as! Restaurant
+            restaurant.name = restaurantNameTextField.text
+            restaurant.type = restaurantTypeTextField.text
+            restaurant.location = restaurantLocationTextField.text
+            restaurant.isVisited = isVisited
+            
+            if let restaurantImage = chosenPhotoImageView.image{
+                if let imageData = UIImagePNGRepresentation(restaurantImage){
+                    restaurant.image = NSData(data: imageData)
+                }
+            }
+            
+            appDelegate?.saveContext()
+            
+            //Clear TextFields values
+            restaurantNameTextField.text = nil
+            restaurantLocationTextField.text = nil
+            restaurantTypeTextField.text = nil
+            
+            dismiss(animated: true, completion: nil)
+         
         }else {
             let alert = UIAlertController(title: "Opps", message: "We can`t proceed ,because one of the field is blank.PLease note that all fields are required.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -72,17 +113,8 @@ class AddRestaurantTableViewController: UITableViewController
             present(alert, animated: true, completion: nil)
         }
     }
-}
-
-extension AddRestaurantTableViewController : UIImagePickerControllerDelegate,UINavigationControllerDelegate
-{
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            chosenPhotoImageView.image = selectedImage
-            chosenPhotoImageView.contentMode = .scaleAspectFill
-            chosenPhotoImageView.clipsToBounds = true
-        }
-        
+    
+    func addRestaurantImageConstraints(){
         //Adding Constriants
         let leadingConstriant = NSLayoutConstraint(item: chosenPhotoImageView, attribute: .leading, relatedBy: .equal, toItem: chosenPhotoImageView.superview, attribute: .leading, multiplier: 1, constant: 0)
         leadingConstriant.isActive = true
@@ -95,6 +127,18 @@ extension AddRestaurantTableViewController : UIImagePickerControllerDelegate,UIN
         
         let bottomConstraint = NSLayoutConstraint(item: chosenPhotoImageView, attribute: .bottom, relatedBy: .equal, toItem: chosenPhotoImageView.superview, attribute: .bottom, multiplier: 1, constant: 0)
         bottomConstraint.isActive = true
+    }
+}
+
+extension AddRestaurantTableViewController : UIImagePickerControllerDelegate,UINavigationControllerDelegate
+{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            chosenPhotoImageView.image = selectedImage
+            chosenPhotoImageView.contentMode = .scaleAspectFill
+            chosenPhotoImageView.clipsToBounds = true
+        }
+        addRestaurantImageConstraints()
         
         dismiss(animated: true, completion: nil)
     }
