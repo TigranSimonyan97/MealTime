@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import FirebaseStorage
 
 class AddRestaurantTableViewController: UITableViewController
 {
@@ -18,12 +19,13 @@ class AddRestaurantTableViewController: UITableViewController
     @IBOutlet weak var restaurantNameTextField: UITextField!
     @IBOutlet weak var restaurantTypeTextField: UITextField!
     @IBOutlet weak var restaurantLocationTextField: UITextField!
+    @IBOutlet weak var restaurantPhoneTextField: UITextField!
     
     @IBOutlet weak var yesButton: UIButton!
-    @IBOutlet weak var noButton: UIButton!
     
     //Properties
     var isVisited: Bool = false
+    var restaurantRating: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +51,26 @@ class AddRestaurantTableViewController: UITableViewController
 //    
     
     
-    //MARK:  Actions
+    //MARK: - Actions
+    
+    @IBAction func ratingButtonTapped(segue: UIStoryboardSegue){
+        
+        print(segue.identifier)
+        
+        if let rating = segue.identifier{
+            switch rating {
+            case "great":
+                restaurantRating = 5.0
+            case "good":
+                restaurantRating = 3.0
+            case "dislike":
+                restaurantRating = 1.0
+            default:
+                break
+            }
+        }
+        print(restaurantRating)
+    }
     
     @IBAction func imagePickerCellTouchUP(_ sender: UITapGestureRecognizer) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
@@ -62,47 +83,67 @@ class AddRestaurantTableViewController: UITableViewController
         }
     }
     
-    @IBAction func isVisitedButtonTouchUp(sender: UIButton) {
-        
-        switch sender {
-        case yesButton:
-            isVisited = true
-            yesButton.backgroundColor = UIColor.red
-            noButton.backgroundColor = UIColor.lightGray
-        case noButton:
-            isVisited = false
-            yesButton.backgroundColor = UIColor.lightGray
-            noButton.backgroundColor = UIColor.red
-        default:
-            break
-        }
-    }
-    
     @IBAction func saveButtonTouchUp(_ sender: UIBarButtonItem){
         if restaurantNameTextField.text != "" ,
-             restaurantTypeTextField.text != "" , restaurantLocationTextField.text != "" {
+            restaurantTypeTextField.text != "" ,
+            restaurantLocationTextField.text != "",
+            let rating = restaurantRating,
+            restaurantPhoneTextField.text != "" {
             
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            let context = appDelegate?.persistentContainer.viewContext
+            //Using CoreData
+//            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+//            let context = appDelegate?.persistentContainer.viewContext
+//            
+//            let restaurant = NSEntityDescription.insertNewObject(forEntityName: "Restaurant", into: context!) as! Restaurant
+//            restaurant.name = restaurantNameTextField.text
+//            restaurant.type = restaurantTypeTextField.text
+//            restaurant.location = restaurantLocationTextField.text
+//            restaurant.isVisited = isVisited
+//            restaurant.rating = String(describing: restaurantRating)
             
-            let restaurant = NSEntityDescription.insertNewObject(forEntityName: "Restaurant", into: context!) as! Restaurant
-            restaurant.name = restaurantNameTextField.text
-            restaurant.type = restaurantTypeTextField.text
-            restaurant.location = restaurantLocationTextField.text
-            restaurant.isVisited = isVisited
+//            if let restaurantImage = chosenPhotoImageView.image {
+//                if let imageData = UIImagePNGRepresentation(restaurantImage) {
+//                    restaurant.image = NSData(data: imageData)
+//                }
+//            }
+//            
+//            appDelegate?.saveContext()
             
-            if let restaurantImage = chosenPhotoImageView.image{
-                if let imageData = UIImagePNGRepresentation(restaurantImage){
-                    restaurant.image = NSData(data: imageData)
+            
+            
+            //Using FireBaseDatabase
+            let restaurantName = restaurantNameTextField.text!
+            let restaurantType = restaurantTypeTextField.text!
+            let restaurantLocaton = restaurantLocationTextField.text!
+            let restaurantPhone = restaurantPhoneTextField.text!
+            
+            let restaurant = RestaurantModel(name: restaurantName, type: restaurantType, location: restaurantLocaton, phone: restaurantPhone, rating: rating)
+            
+            DataService.instance.saveRestaurant(restaurantModel: restaurant)
+            
+            
+            //Upload restaurant image to FirebaseStorage
+            let  storageRef = Storage.storage().reference().child("\(restaurantName)image.png")
+            
+            if let restaurantImage = chosenPhotoImageView.image {
+                if let uploadedData = UIImagePNGRepresentation(restaurantImage) {
+                    storageRef.putData(uploadedData, metadata: nil, completion: { (metadata, error) in
+                        if error != nil {
+                            print(error!)
+                            return
+                        }
+                        print(metadata)
+                    })
                 }
             }
+
             
-            appDelegate?.saveContext()
             
             //Clear TextFields values
             restaurantNameTextField.text = nil
             restaurantLocationTextField.text = nil
             restaurantTypeTextField.text = nil
+            restaurantPhoneTextField.text = nil
             
             dismiss(animated: true, completion: nil)
          
@@ -144,3 +185,5 @@ extension AddRestaurantTableViewController : UIImagePickerControllerDelegate,UIN
     }
 
 }
+
+

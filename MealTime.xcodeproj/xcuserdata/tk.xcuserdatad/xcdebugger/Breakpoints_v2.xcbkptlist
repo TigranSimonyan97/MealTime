@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MealTime/RestaurantDetailViewController.swift"
-            timestampString = "532027862.083476"
+            timestampString = "532628640.189765"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -119,46 +119,46 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MealTime/AddRestaurantTableViewController.swift"
-            timestampString = "532032976.801073"
+            filePath = "MealTime/RestoListViewController.swift"
+            timestampString = "534541211.971329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "AddRestaurantTableViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MealTime/AddRestaurantTableViewController.swift"
-            timestampString = "532033670.203893"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "isVisitedButtonTouchUp(sender:)"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "filterContent(for:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MealTime/AddRestaurantTableViewController.swift"
-            timestampString = "532033670.203893"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "imagePickerCellTouchUP(_:)"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MealTime.RestoListViewController.filterContent (for : Swift.String) -&gt; ()"
+                  moduleName = "MealTime"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tk/Desktop/MealTime/MealTime/RestoListViewController.swift"
+                  timestampString = "533107639.981861"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "42">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MealTime.RestoListViewController.(filterContent (for : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "MealTime"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tk/Desktop/MealTime/MealTime/RestoListViewController.swift"
+                  timestampString = "533107639.986599"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "39">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

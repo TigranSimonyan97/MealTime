@@ -13,17 +13,22 @@ struct RestaurantModel
     var name: String
     var type: String
     var location: String
-    var image: String
-    var isVisited: Bool
     var phone: String
-    var rating: String = ""
+    var rating: Double = 0.0
     
-    init(name: String, type: String, location: String, phone: String, image: String, isVisited: Bool){
+    init(json: [String : Any]) {
+        self.name = json["restaurantName"] as? String ?? ""
+        self.type = json["restauranttype"] as? String ?? ""
+        self.location = json["restaurantLocation"] as? String ?? ""
+        self.phone = json["restaurantPhone"] as? String ?? ""
+        self.rating = json["restaurantRating"] as? Double ?? 0.0
+    }
+    
+    init(name: String, type: String, location: String, phone: String,rating: Double) {
         self.name = name
         self.type = type
         self.location = location
-        self.image = image
-        self.isVisited = isVisited
         self.phone = phone
+        self.rating = rating
     }
 }

@@ -23,8 +23,8 @@ class ReviewViewController: UIViewController {
         super.viewDidLoad()
 
         //Set images for background image and restaurant image
-        backgroundImage.image = UIImage(data: restaurantImageName)
-        restaurantPhotoImageView.image = UIImage(data: restaurantImageName)
+        backgroundImage.image = UIImage(named: "cafedeadend")
+        restaurantPhotoImageView.image = UIImage(named: "cafedeadend")
         
         
         //Prepearing for animation
