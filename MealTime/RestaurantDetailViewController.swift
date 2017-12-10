@@ -9,17 +9,26 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FirebaseStorage
 
 
 class RestaurantDetailViewController: UIViewController
 {
     //UI Elements
-    @IBOutlet weak var restoPhotoImg: UIImageView!
+    @IBOutlet weak var restoPhotoImg: UIImageView!{
+        didSet{
+            spinner?.stopAnimating()
+        }
+    }
     @IBOutlet weak var restoInfoTableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     //Properties
     var restaurant: Restaurant!
+    
+    
+    var restaurantFIR: RestaurantModel!
     
     let regionRadius: CLLocationDistance = 1000
     let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
@@ -29,9 +38,21 @@ class RestaurantDetailViewController: UIViewController
         
         self.title = restaurant.name
         self.navigationController?.navigationBar.tintColor = UIColor.black
-        restoPhotoImg.image = UIImage(data: (restaurant.image as Data?)!)
+//        restoPhotoImg.image = UIImage(data: (restaurant.image as Data?)!)
         
         
+        let storageRef = Storage.storage().reference()
+        let imageRef = storageRef.child("\(self.restaurantFIR.name)image.png")
+            
+        imageRef.getData(maxSize: 100 * 1024 * 1024) { (data, error) in
+            if error != nil {
+                print(error.debugDescription)
+            }else {
+                if let imageData = data {
+                    self.restoPhotoImg.image = UIImage(data: imageData)
+                }
+            }
+        }
         
         restoInfoTableView.estimatedRowHeight = 36.0
         restoInfoTableView.rowHeight = UITableViewAutomaticDimension
@@ -152,18 +173,18 @@ extension RestaurantDetailViewController: UITableViewDataSource,UITableViewDeleg
         switch indexPath.row {
         case 0:
             cell.nameLbl.text = "Name"
-            cell.valueLbl.text = restaurant.name
+            cell.valueLbl.text = restaurantFIR.name
         case 1:
             cell.nameLbl.text = "Type"
-            cell.valueLbl.text = restaurant.type
+            cell.valueLbl.text = restaurantFIR.type
         case 2:
             cell.nameLbl.text = "Location"
-            cell.valueLbl.text = restaurant.location
+            cell.valueLbl.text = restaurantFIR.location
         case 3:
             cell.nameLbl.text = "Phone"
-            cell.valueLbl.text = restaurant.phone
+            cell.valueLbl.text = restaurantFIR.phone
         case 4:
-            cell.nameLbl.text = "Been here"
+            cell.nameLbl.text = "Rating"
             cell.valueLbl.text = restaurant.isVisited ? "Yes,I`ve been here before, \(restaurant.rating)" :"No"
         default: break
         }

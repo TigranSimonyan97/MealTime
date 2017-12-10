@@ -336,6 +336,10 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NKV-Nt-ZXP">
                                 <rect key="frame" x="0.0" y="64" width="375" height="267"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="GsU-rQ-1O4">
+                                <rect key="frame" x="177" y="187" width="20" height="20"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="36" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Of1-aE-c5t">
                                 <rect key="frame" x="0.0" y="335" width="375" height="332"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -405,7 +409,9 @@
                             <constraint firstAttribute="trailing" secondItem="NKV-Nt-ZXP" secondAttribute="trailing" id="6Il-mC-NZV"/>
                             <constraint firstItem="Of1-aE-c5t" firstAttribute="leading" secondItem="NKV-Nt-ZXP" secondAttribute="leading" id="CZF-yj-A0Q"/>
                             <constraint firstItem="5Ke-rf-nn3" firstAttribute="width" secondItem="NKV-Nt-ZXP" secondAttribute="width" multiplier="0.1" id="Exn-f2-dQz"/>
+                            <constraint firstItem="GsU-rQ-1O4" firstAttribute="centerY" secondItem="NKV-Nt-ZXP" secondAttribute="centerY" id="IBp-Os-2rp"/>
                             <constraint firstItem="NKV-Nt-ZXP" firstAttribute="height" secondItem="iFz-Ph-8Fz" secondAttribute="height" multiplier="0.4" id="Iw6-HG-ksy"/>
+                            <constraint firstItem="GsU-rQ-1O4" firstAttribute="centerX" secondItem="NKV-Nt-ZXP" secondAttribute="centerX" id="Ysn-TG-Y8F"/>
                             <constraint firstItem="UJ1-Vn-Nol" firstAttribute="top" secondItem="Of1-aE-c5t" secondAttribute="bottom" id="quy-NB-xg3"/>
                             <constraint firstItem="NKV-Nt-ZXP" firstAttribute="top" secondItem="YZv-DE-1jc" secondAttribute="bottom" id="u1c-OK-jIb"/>
                             <constraint firstItem="5Ke-rf-nn3" firstAttribute="top" secondItem="YZv-DE-1jc" secondAttribute="bottom" constant="8" id="vD8-tp-Mpe"/>
@@ -417,6 +423,7 @@
                         <outlet property="mapView" destination="0fK-PY-8OI" id="lhw-ce-5Sy"/>
                         <outlet property="restoInfoTableView" destination="Of1-aE-c5t" id="6nw-Ne-zbz"/>
                         <outlet property="restoPhotoImg" destination="NKV-Nt-ZXP" id="rnU-hp-lOt"/>
+                        <outlet property="spinner" destination="GsU-rQ-1O4" id="obo-Nv-GBC"/>
                         <segue destination="5rY-3b-dp6" kind="show" identifier="showMap" id="A4h-Xc-OwQ"/>
                     </connections>
                 </viewController>

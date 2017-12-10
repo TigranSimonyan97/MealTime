@@ -18,7 +18,7 @@ struct RestaurantModel
     
     init(json: [String : Any]) {
         self.name = json["restaurantName"] as? String ?? ""
-        self.type = json["restauranttype"] as? String ?? ""
+        self.type = json["restaurantType"] as? String ?? ""
         self.location = json["restaurantLocation"] as? String ?? ""
         self.phone = json["restaurantPhone"] as? String ?? ""
         self.rating = json["restaurantRating"] as? Double ?? 0.0

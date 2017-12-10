@@ -11,16 +11,24 @@ import CoreData
 import FirebaseDatabase
 import FirebaseStorage
 import FirebaseStorageUI
+import AlamofireImage
 
 class RestoListViewController: UITableViewController
 {
     
+    var refreshController: UIRefreshControl!
     var searchController: UISearchController!
+    
     
     //Properties
     var restaurantList: [Restaurant] = []
     var restaurant: Restaurant!
+    
+    
+    //Using Firebas
     var restaurantListFromFirebase: [RestaurantModel] = []
+    var restaurantFIR: RestaurantModel?
+    
     
     var searchResult: [Restaurant] = []
     
@@ -38,10 +46,20 @@ class RestoListViewController: UITableViewController
         searchController.dimsBackgroundDuringPresentation = false
         
         
-        //Get Data from Firebase Database
+        //refresh table view
+        refreshController = UIRefreshControl()
+        refreshController.addTarget(self, action: #selector(refreshTableView), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshController)
         
         getRestaurants()
         
+    }
+    
+    
+    func refreshTableView()
+    {
+        tableView.reloadData()
+        refreshController.endRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +71,7 @@ class RestoListViewController: UITableViewController
         
         if segue.identifier == "showRestoDetail"{
             let destinationController = segue.destination as! RestaurantDetailViewController
+                destinationController.restaurantFIR = self.restaurantFIR
                 destinationController.restaurant = self.restaurant
         }
     }
@@ -79,13 +98,44 @@ class RestoListViewController: UITableViewController
                 for (value) in snapshotValue.values {
                     if let json = value as? [String : Any]{
                         let restaurant = RestaurantModel(json: json)
-                        self.restaurantListFromFirebase.append(restaurant)
+                        if (!self.isRestaurantAlreadyExist(restaurant: restaurant)){
+                            self.restaurantListFromFirebase.append(restaurant)
+                        }
                     }
                 }
                 self.tableView.reloadData()
             }
         }
         
+    }
+    
+    func isRestaurantAlreadyExist(restaurant:RestaurantModel) -> Bool
+    {
+        var restaurantsName:[String] = []
+        for restaurant in self.restaurantListFromFirebase {
+            restaurantsName.append(restaurant.name)
+        }
+        
+        return restaurantsName.contains(restaurant.name)
+    }
+    
+    func getRestaurantImageFromFIRStorage(indexPathRow: Int) -> URL? {
+    
+        var imageURL: URL?
+        let restaurantName = restaurantListFromFirebase[indexPathRow].name
+        
+        let storageRef = Storage.storage().reference()
+        let referance = storageRef.child("\(restaurantName)image.png")
+        
+        referance.downloadURL { (url, error) in
+            if error != nil{
+                print ("error is: \(error.debugDescription)")
+            } else {
+                imageURL = url
+            }
+        }
+        
+        return imageURL
     }
     
     func  filterContent(for searchText: String) {
@@ -104,7 +154,10 @@ class RestoListViewController: UITableViewController
     @IBAction func backToHomePage(segue: UIStoryboardSegue){
     
     }
+    
 }
+
+
 
 extension RestoListViewController
 {
@@ -126,7 +179,8 @@ extension RestoListViewController
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.restaurant = searchController.isActive ?  searchResult[indexPath.row] : restaurantList[indexPath.row]
+        self.restaurant = restaurantList[indexPath.row]
+        self.restaurantFIR = restaurantListFromFirebase[indexPath.row]
         self.performSegue(withIdentifier: "showRestoDetail", sender: self)
         print("Table View Cell")
         print(restaurant)
@@ -139,22 +193,26 @@ extension RestoListViewController
         //Create and prepare cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestoLIstItemCell", for: indexPath) as! RestoListItemCell
         
+        let restaurant = restaurantListFromFirebase[indexPath.row]
         
-        cell.restoNameLbl.text = restaurantListFromFirebase[indexPath.row].name
-        cell.restoLocationLbl.text = restaurantListFromFirebase[indexPath.row].location
-        cell.restoTypeLbl.text = restaurantListFromFirebase[indexPath.row].type
-        
-        let restaurantName = restaurantListFromFirebase[indexPath.row].name
+        cell.restoNameLbl.text = restaurant.name
+        cell.restoLocationLbl.text = restaurant.location
+        cell.restoTypeLbl.text = restaurant.type
         
         let storageRef = Storage.storage().reference()
-        let referance = storageRef.child("\(restaurantName)image.png")
-        print("referance is : \(referance)")
+        let imageRef = storageRef.child("\(restaurant.name)image.png")
         
-        let placeholderImage = UIImage(named: "photoalbum")
+        imageRef.getData(maxSize: 100 * 1024 * 1024) { (data, error) in
+            if error != nil {
+                print(error.debugDescription)
+            }else {
+                if let imageData = data {
+                    cell.restoPhotoImage.image = UIImage(data: imageData)
+                }
+            }
+        }
         
         
-        cell.restoPhotoImage.image = nil
-        cell.restoPhotoImage.sd_setImage(with: referance, placeholderImage: placeholderImage) // = UIImage(named: "photoalbum") //UIImage(data: (restaurants[indexPath.row].image as Data?)!)
         
         return cell
     }
