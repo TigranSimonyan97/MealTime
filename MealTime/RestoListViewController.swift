@@ -72,7 +72,7 @@ class RestoListViewController: UITableViewController
         if segue.identifier == "showRestoDetail"{
             let destinationController = segue.destination as! RestaurantDetailViewController
                 destinationController.restaurantFIR = self.restaurantFIR
-                destinationController.restaurant = self.restaurant
+//                destinationController.restaurant = self.restaurant
         }
     }
     
@@ -179,11 +179,9 @@ extension RestoListViewController
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.restaurant = restaurantList[indexPath.row]
+//        self.restaurant = restaurantList[indexPath.row]
         self.restaurantFIR = restaurantListFromFirebase[indexPath.row]
         self.performSegue(withIdentifier: "showRestoDetail", sender: self)
-        print("Table View Cell")
-        print(restaurant)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -25,7 +25,7 @@ class RestaurantDetailViewController: UIViewController
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     //Properties
-    var restaurant: Restaurant!
+//    var restaurant: Restaurant!
     
     
     var restaurantFIR: RestaurantModel!
@@ -36,7 +36,7 @@ class RestaurantDetailViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = restaurant.name
+//        self.title = restaurant.name
         self.navigationController?.navigationBar.tintColor = UIColor.black
 //        restoPhotoImg.image = UIImage(data: (restaurant.image as Data?)!)
         
@@ -53,9 +53,10 @@ class RestaurantDetailViewController: UIViewController
                 }
             }
         }
-        
+                
         restoInfoTableView.estimatedRowHeight = 36.0
         restoInfoTableView.rowHeight = UITableViewAutomaticDimension
+        
         
         mapView.mapType = .standard
         
@@ -87,7 +88,6 @@ class RestaurantDetailViewController: UIViewController
                         //Set zoom level
                         let region = MKCoordinateRegionMakeWithDistance(annotation.coordinate, 2500, 2500)
                         self.mapView.setRegion(region, animated: true)
-                        print("We are happy!!!")
                     }
                 }
             }
@@ -98,6 +98,36 @@ class RestaurantDetailViewController: UIViewController
         mapView.addGestureRecognizer(mapViewTapGesture)
     }
     
+    
+    func countRestaurantRating(rating: [String : Int]) -> Double
+    {
+
+        var ratingCount = 0.0
+        var ratingSum = 0.0
+        
+        for (key, value) in rating {
+            let stars = starCount(key)
+            ratingSum = ratingSum + stars * Double(value)
+            ratingCount = ratingCount + Double(value)
+        }
+        
+        return ratingSum / ratingCount
+    }
+    
+    func starCount(_ key: String) -> Double {
+        var starCount: Double!
+        switch key {
+        case "1star":
+            starCount = 1.0
+        case "3star":
+            starCount = 3.0
+        case "5star":
+            starCount = 5.0
+        default:
+            break
+        }
+        return starCount
+    }
     
     func   centerMapOnLocation(location:CLLocation){
         //Add Radius
@@ -122,22 +152,22 @@ class RestaurantDetailViewController: UIViewController
     
     @IBAction func ratingButtonTapped(segue: UIStoryboardSegue){
         
-        restaurant.isVisited = true
-        
-        if let rating = segue.identifier{
-            switch rating {
-            case "great":
-                restaurant.rating = "Absolutely love it! Must try."
-            case "good":
-                restaurant.rating = "Pretty good."
-            case "dislike":
-                restaurant.rating = "I don`t like it."
-            default:
-                break
-            }
-        }
-        print(restaurant.rating)
-        restoInfoTableView.reloadData()
+//        restaurant.isVisited = true
+//        
+//        if let rating = segue.identifier{
+//            switch rating {
+//            case "great":
+//                restaurant.rating = "Absolutely love it! Must try."
+//            case "good":
+//                restaurant.rating = "Pretty good."
+//            case "dislike":
+//                restaurant.rating = "I don`t like it."
+//            default:
+//                break
+//            }
+//        }
+//        print(restaurant.rating)
+//        restoInfoTableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -145,11 +175,11 @@ class RestaurantDetailViewController: UIViewController
             switch segueIdentifier {
             case "showReview":
                 let destinationViewController = segue.destination as! ReviewViewController
-                destinationViewController.restaurantImageName = restaurant.image as Data?
+//                destinationViewController.restaurantImageName = restaurant.image as Data?
             case "showMap":
                 let destinationVIewController = segue.destination as! MapViewController
                 destinationVIewController.location = initialLocation
-                destinationVIewController.restaurant = restaurant
+//                destinationVIewController.restaurant = restaurant
             default:
                 break
             }
@@ -185,7 +215,7 @@ extension RestaurantDetailViewController: UITableViewDataSource,UITableViewDeleg
             cell.valueLbl.text = restaurantFIR.phone
         case 4:
             cell.nameLbl.text = "Rating"
-            cell.valueLbl.text = restaurant.isVisited ? "Yes,I`ve been here before, \(restaurant.rating)" :"No"
+            cell.valueLbl.text = "\(countRestaurantRating(rating: restaurantFIR.rating))/5.0" //restaurant.isVisited ? "Yes,I`ve been here before, \(restaurant.rating)" :"No"
         default: break
         }
         

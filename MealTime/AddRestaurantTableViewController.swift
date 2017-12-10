@@ -25,7 +25,7 @@ class AddRestaurantTableViewController: UITableViewController
     
     //Properties
     var isVisited: Bool = false
-    var restaurantRating: Double?
+    var restaurantRating: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,23 +53,9 @@ class AddRestaurantTableViewController: UITableViewController
     
     //MARK: - Actions
     
-    @IBAction func ratingButtonTapped(segue: UIStoryboardSegue){
-        
-        print(segue.identifier)
-        
-        if let rating = segue.identifier{
-            switch rating {
-            case "great":
-                restaurantRating = 5.0
-            case "good":
-                restaurantRating = 3.0
-            case "dislike":
-                restaurantRating = 1.0
-            default:
-                break
-            }
-        }
-        print(restaurantRating)
+    @IBAction func ratingButtonTapped(segue: UIStoryboardSegue)
+    {
+        restaurantRating = segue.identifier
     }
     
     @IBAction func imagePickerCellTouchUP(_ sender: UITapGestureRecognizer) {
@@ -87,7 +73,7 @@ class AddRestaurantTableViewController: UITableViewController
         if restaurantNameTextField.text != "" ,
             restaurantTypeTextField.text != "" ,
             restaurantLocationTextField.text != "",
-            let rating = restaurantRating,
+            restaurantRating != nil,
             restaurantPhoneTextField.text != "" {
             
             //Using CoreData
@@ -116,6 +102,20 @@ class AddRestaurantTableViewController: UITableViewController
             let restaurantType = restaurantTypeTextField.text!
             let restaurantLocaton = restaurantLocationTextField.text!
             let restaurantPhone = restaurantPhoneTextField.text!
+            
+            var rating: [String : Int] = [:]
+            if let restoRating = restaurantRating {
+                switch restoRating {
+                case "great":
+                    rating = ["1star" : 0, "3star" : 0, "5star" : 1]
+                case "good":
+                    rating = ["1star" : 0, "3star" : 1, "5star" : 0]
+                case "dislike":
+                    rating = ["1star" : 1, "3star" : 0, "5star" : 0]
+                default:
+                    break
+                }
+            }
             
             let restaurant = RestaurantModel(name: restaurantName, type: restaurantType, location: restaurantLocaton, phone: restaurantPhone, rating: rating)
             
