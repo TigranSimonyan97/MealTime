@@ -130,7 +130,6 @@ class RestaurantDetailViewController: UIViewController
     
     func updateRestaurantRating()
     {
-        
         switch ratingFromReview! {
         case 5.0:
             restaurantFIR.rating["5star"] = restaurantFIR.rating["5star"]! + 1
@@ -146,7 +145,6 @@ class RestaurantDetailViewController: UIViewController
     
     func countRestaurantRating(rating: [String : Int]) -> (rating: Double,ratersCount: Int)
     {
-
         var ratingCount = 0.0
         var ratingSum = 0.0
         

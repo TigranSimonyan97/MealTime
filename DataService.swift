@@ -23,7 +23,7 @@ class DataService
         return Database.database().reference().child("restaurant")
     }
     
-    func saveRestaurant(restaurantModel: RestaurantModel)
+    func saveRestaurant(restaurantModel: RestaurantModel,userFirstRate: Double)
     {
         let key = mainRef.childByAutoId().key
         
@@ -35,6 +35,7 @@ class DataService
                                                          "restaurantRating" : restaurantModel.rating]
         
         mainRef.child(key).setValue(restaurant)
+        UserDefaults.standard.set(userFirstRate, forKey: "UserRateRestaurant_\(key)")
     }
     
     func updateRating(restaurantModel: RestaurantModel)

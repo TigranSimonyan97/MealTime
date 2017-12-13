@@ -132,7 +132,7 @@ class AddRestaurantTableViewController: UITableViewController
             
             let restaurant = RestaurantModel(name: restaurantName, type: restaurantType, location: restaurantLocaton, phone: restaurantPhone, rating: rating)
             
-            DataService.instance.saveRestaurant(restaurantModel: restaurant)
+            DataService.instance.saveRestaurant(restaurantModel: restaurant,userFirstRate: ratingFromReview!)
             
             
             //Upload restaurant image to FirebaseStorage
@@ -169,15 +169,13 @@ class AddRestaurantTableViewController: UITableViewController
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let identifier = segue.identifier!
+        let identifier = segue.identifier
         
-        switch identifier {
-        case "showRatingFromAddRestaurant":
+        if identifier == "showRatingFromAddRestaurant" {
             let destinationController = segue.destination as! ReviewViewController
             destinationController.segueFromController = "AddRestaurantController"
-        default:
-            break
         }
+        
     }
     
     func addRestaurantImageConstraints(){

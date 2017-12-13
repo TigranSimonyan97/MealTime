@@ -85,6 +85,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="uXq-s7-kd8">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="NAn-eN-j7m">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="P5b-tD-qhx" kind="presentation" identifier="addRestaurant" id="dWS-JJ-mKg"/>
                             </connections>
@@ -293,10 +294,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Restaurant" id="S0p-Uz-62g">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jwU-3c-BeD">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ubh-dM-2Vt">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="34O-xP-7iC" kind="unwind" unwindAction="backToHomePageWithSegue:" id="xsI-Et-1Cx"/>
+                                <segue destination="34O-xP-7iC" kind="unwind" unwindAction="backToHomePageWithSegue:" id="qH8-st-jw8"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="zcb-R7-Ds6">
@@ -357,11 +358,11 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </mapView>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RestaurantDetailCell" rowHeight="48" id="uy1-Si-0E5" customClass="RestaurantDetailCell" customModule="MealTime" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RestaurantDetailCell" rowHeight="48" id="uy1-Si-0E5" customClass="RestaurantDetailCell" customModule="MealTime" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uy1-Si-0E5" id="tj9-JE-hXv">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDN-Qe-YQ6">
