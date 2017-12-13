@@ -15,23 +15,27 @@ import FirebaseStorage
 class RestaurantDetailViewController: UIViewController
 {
     //UI Elements
-    @IBOutlet weak var restoPhotoImg: UIImageView!{
-        didSet{
-            spinner?.stopAnimating()
-        }
-    }
+    @IBOutlet weak var restoPhotoImg: UIImageView!
     @IBOutlet weak var restoInfoTableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var rateButton: UIButton!
     
     //Properties
 //    var restaurant: Restaurant!
-    
-    
     var restaurantFIR: RestaurantModel!
     
+    var restaurantRating: String?
+    var ratingFromReview: Double? {
+        didSet {
+            updateRestaurantRating()
+        }
+    }
+    
+    var restaurantImageDataForMApAnnotation: UIImage?
+    
     let regionRadius: CLLocationDistance = 1000
-    let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
+    var initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +43,9 @@ class RestaurantDetailViewController: UIViewController
 //        self.title = restaurant.name
         self.navigationController?.navigationBar.tintColor = UIColor.black
 //        restoPhotoImg.image = UIImage(data: (restaurant.image as Data?)!)
+        
+        restoInfoTableView.delegate = self
+        restoInfoTableView.dataSource = self
         
         
         let storageRef = Storage.storage().reference()
@@ -50,6 +57,10 @@ class RestaurantDetailViewController: UIViewController
             }else {
                 if let imageData = data {
                     self.restoPhotoImg.image = UIImage(data: imageData)
+                    self.spinner.stopAnimating()
+                    if let image = self.restoPhotoImg.image {
+                        self.restaurantImageDataForMApAnnotation = image
+                    }
                 }
             }
         }
@@ -70,15 +81,12 @@ class RestaurantDetailViewController: UIViewController
                 self.present(alert, animated: true, completion: nil)
                 print(error.debugDescription)
             }else{
-                
                 if let placemarks = placemarks{
                     let placemark = placemarks[0]
                     
                     print("Make error \(placemark.location)")
                     
                     let annotation = MKPointAnnotation()
-                    
-                    
                     
                     if let location = placemark.location{
                         //Set Annotation
@@ -88,6 +96,8 @@ class RestaurantDetailViewController: UIViewController
                         //Set zoom level
                         let region = MKCoordinateRegionMakeWithDistance(annotation.coordinate, 2500, 2500)
                         self.mapView.setRegion(region, animated: true)
+                        
+                        self.initialLocation = location
                     }
                 }
             }
@@ -96,10 +106,44 @@ class RestaurantDetailViewController: UIViewController
         //Add tap gesture recognizer for MapView
         let mapViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(showMap))
         mapView.addGestureRecognizer(mapViewTapGesture)
+        
+        
+        if (UserDefaults.standard.bool(forKey: "UserRateRestaurant_\(restaurantFIR.id)")) {
+            setRateButtonState()
+        }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let rat = ratingFromReview {
+            print("rat is from detail : \(rat)")
+        }
+    }
     
-    func countRestaurantRating(rating: [String : Int]) -> Double
+    func setRateButtonState()
+    {
+        rateButton.setImage(UIImage(named: "cross"), for: .normal)
+        rateButton.isUserInteractionEnabled = false
+    }
+    
+    func updateRestaurantRating()
+    {
+        
+        switch ratingFromReview! {
+        case 5.0:
+            restaurantFIR.rating["5star"] = restaurantFIR.rating["5star"]! + 1
+        case 3.0:
+            restaurantFIR.rating["3star"] = restaurantFIR.rating["3star"]! + 1
+        case 1.0:
+            restaurantFIR.rating["1star"] = restaurantFIR.rating["1star"]! + 1
+        default:
+            break
+        }
+        DataService.instance.updateRating(restaurantModel: restaurantFIR)
+    }
+    
+    func countRestaurantRating(rating: [String : Int]) -> (rating: Double,ratersCount: Int)
     {
 
         var ratingCount = 0.0
@@ -111,7 +155,7 @@ class RestaurantDetailViewController: UIViewController
             ratingCount = ratingCount + Double(value)
         }
         
-        return ratingSum / ratingCount
+        return (ratingSum / ratingCount, Int(ratingCount))
     }
     
     func starCount(_ key: String) -> Double {
@@ -127,6 +171,14 @@ class RestaurantDetailViewController: UIViewController
             break
         }
         return starCount
+    }
+    
+    //Make Call
+    func makeCall(number: String) {
+        let phoneNumber = number.replacingOccurrences(of: " ", with: "")
+        let url = URL(string: "tel://\(phoneNumber)")!
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        print("makeCall")
     }
     
     func   centerMapOnLocation(location:CLLocation){
@@ -146,8 +198,16 @@ class RestaurantDetailViewController: UIViewController
     }
     
     //Unwind segue
-    @IBAction func close(segue: UIStoryboardSegue){
+    @IBAction func closeRatingFromDetailController(segue: UIStoryboardSegue){
         
+    }
+    
+    @IBAction func rateButtonTapped(segue: UIStoryboardSegue)
+    {
+        restaurantRating = segue.identifier
+        print("restaurantRating from detail \(restaurantRating)")
+        UserDefaults.standard.set(true, forKey: "UserRateRestaurant_\(restaurantFIR.id)")
+        setRateButtonState()
     }
     
     @IBAction func ratingButtonTapped(segue: UIStoryboardSegue){
@@ -173,13 +233,13 @@ class RestaurantDetailViewController: UIViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let segueIdentifier = segue.identifier{
             switch segueIdentifier {
-            case "showReview":
+            case "showRatingFromDetail":
                 let destinationViewController = segue.destination as! ReviewViewController
-//                destinationViewController.restaurantImageName = restaurant.image as Data?
+                destinationViewController.segueFromController = "DetailController"
             case "showMap":
                 let destinationVIewController = segue.destination as! MapViewController
                 destinationVIewController.location = initialLocation
-//                destinationVIewController.restaurant = restaurant
+                destinationVIewController.restaurantFIR = restaurantFIR
             default:
                 break
             }
@@ -187,17 +247,20 @@ class RestaurantDetailViewController: UIViewController
     }
 }
 
-extension RestaurantDetailViewController: UITableViewDataSource,UITableViewDelegate{
+extension RestaurantDetailViewController: UITableViewDataSource,UITableViewDelegate {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return 5
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantDetailCell", for: indexPath) as! RestaurantDetailCell
         
         switch indexPath.row {
@@ -215,10 +278,19 @@ extension RestaurantDetailViewController: UITableViewDataSource,UITableViewDeleg
             cell.valueLbl.text = restaurantFIR.phone
         case 4:
             cell.nameLbl.text = "Rating"
-            cell.valueLbl.text = "\(countRestaurantRating(rating: restaurantFIR.rating))/5.0" //restaurant.isVisited ? "Yes,I`ve been here before, \(restaurant.rating)" :"No"
+            cell.valueLbl.text = "\(countRestaurantRating(rating: restaurantFIR.rating).rating)/5.0  Raters: \(countRestaurantRating(rating: restaurantFIR.rating).ratersCount)" //restaurant.isVisited ? "Yes,I`ve been here before, \(restaurant.rating)" :"No"
         default: break
         }
         
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        if indexPath.row == 3 {
+            makeCall(number: restaurantFIR.phone)
+        }
+        print("indexPathe.row is : \(indexPath.row)")
     }
 }

@@ -20,20 +20,40 @@ class DataService
     }
     
     var mainRef: DatabaseReference{
-        return Database.database().reference()
+        return Database.database().reference().child("restaurant")
     }
     
-    func saveRestaurant(restaurantModel:RestaurantModel) {
-        let restaurant: Dictionary<String, Any> = ["restaurantName" : restaurantModel.name,
+    func saveRestaurant(restaurantModel: RestaurantModel)
+    {
+        let key = mainRef.childByAutoId().key
+        
+        let restaurant: Dictionary<String, Any> = ["restaurantId" : key,
+                                                        "restaurantName" : restaurantModel.name,
                                                          "restaurantType" : restaurantModel.type,
                                                          "restaurantPhone" :restaurantModel.phone,
                                                          "restaurantLocation" : restaurantModel.location,
                                                          "restaurantRating" : restaurantModel.rating]
         
-        mainRef.child("restaurant").childByAutoId().setValue(restaurant)
+        mainRef.child(key).setValue(restaurant)
     }
     
-    func getRestaurants() -> [RestaurantModel] {
+    func updateRating(restaurantModel: RestaurantModel)
+    {
+        print("id is \(restaurantModel.id)")
+        let restaurant: Dictionary<String, Any> = ["restaurantId" : restaurantModel.id,
+                                                   "restaurantName" : restaurantModel.name,
+                                                   "restaurantType" : restaurantModel.type,
+                                                   "restaurantPhone" :restaurantModel.phone,
+                                                   "restaurantLocation" : restaurantModel.location,
+                                                   "restaurantRating" : restaurantModel.rating]
+        mainRef.child(restaurantModel.id).setValue(restaurant)
+        
+//        let ref = mainRef.child("restaurant").childByAutoId().key
+//        print("ref id : \(ref)")
+    }
+    
+    func getRestaurants() -> [RestaurantModel]
+    {
         
         var restaurants = [RestaurantModel]()
         

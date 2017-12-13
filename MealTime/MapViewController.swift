@@ -16,9 +16,11 @@ class MapViewController: UIViewController,MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     //Properties
-    var restaurant: Restaurant!
+    var restaurantFIR: RestaurantModel!
     var location: CLLocation!
     let radius: CLLocationDistance = 2500
+    var restaurantImageDataForMApAnnotation: UIImage!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +50,7 @@ class MapViewController: UIViewController,MKMapViewDelegate {
         }
         
         let restaurantImageForAnnotation = UIImageView(frame: CGRect.init(x: 0.0, y: 0.0, width: 53, height: 53))
-        restaurantImageForAnnotation.image = UIImage(data: (restaurant.image as Data?)!)
+        restaurantImageForAnnotation.image = restaurantImageDataForMApAnnotation
         annotationView?.leftCalloutAccessoryView = restaurantImageForAnnotation
         
         return annotationView
@@ -57,8 +59,8 @@ class MapViewController: UIViewController,MKMapViewDelegate {
     func centerMapOnLocation(location: CLLocation){
         let annotation = MKPointAnnotation()
         annotation.coordinate = location.coordinate
-        annotation.title = restaurant.name
-        annotation.subtitle = restaurant.type
+        annotation.title = restaurantFIR.name
+        annotation.subtitle = restaurantFIR.type
         
         let region = MKCoordinateRegionMakeWithDistance(location.coordinate, radius, radius)
         

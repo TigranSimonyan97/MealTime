@@ -10,6 +10,7 @@ import Foundation
 
 struct RestaurantModel
 {
+    var id: String = ""
     var name: String
     var type: String
     var location: String
@@ -17,6 +18,7 @@ struct RestaurantModel
     var rating: [String : Int]
     
     init(json: [String : Any]) {
+        self.id = json["restaurantId"] as? String ?? ""
         self.name = json["restaurantName"] as? String ?? ""
         self.type = json["restaurantType"] as? String ?? ""
         self.location = json["restaurantLocation"] as? String ?? ""

@@ -25,7 +25,8 @@ class AddRestaurantTableViewController: UITableViewController
     
     //Properties
     var isVisited: Bool = false
-    var restaurantRating: String?
+    
+    var ratingFromReview: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,12 +51,24 @@ class AddRestaurantTableViewController: UITableViewController
 //    }
 //    
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let rat = ratingFromReview {
+            print("rat from add is : \(rat)")
+        }
+
+    }
     
     //MARK: - Actions
+    @IBAction func closeRatingFromAddRestaurantController(segue: UIStoryboardSegue){
+        
+    }
     
     @IBAction func ratingButtonTapped(segue: UIStoryboardSegue)
     {
-        restaurantRating = segue.identifier
+//        restaurantRating = segue.identifier
+//        print("restaurantRating from add \(restaurantRating)")
     }
     
     @IBAction func imagePickerCellTouchUP(_ sender: UITapGestureRecognizer) {
@@ -73,7 +86,7 @@ class AddRestaurantTableViewController: UITableViewController
         if restaurantNameTextField.text != "" ,
             restaurantTypeTextField.text != "" ,
             restaurantLocationTextField.text != "",
-            restaurantRating != nil,
+            ratingFromReview != nil,
             restaurantPhoneTextField.text != "" {
             
             //Using CoreData
@@ -104,13 +117,13 @@ class AddRestaurantTableViewController: UITableViewController
             let restaurantPhone = restaurantPhoneTextField.text!
             
             var rating: [String : Int] = [:]
-            if let restoRating = restaurantRating {
+            if let restoRating = ratingFromReview {
                 switch restoRating {
-                case "great":
+                case 5.0:
                     rating = ["1star" : 0, "3star" : 0, "5star" : 1]
-                case "good":
+                case 3.0:
                     rating = ["1star" : 0, "3star" : 1, "5star" : 0]
-                case "dislike":
+                case 1.0:
                     rating = ["1star" : 1, "3star" : 0, "5star" : 0]
                 default:
                     break
@@ -152,6 +165,18 @@ class AddRestaurantTableViewController: UITableViewController
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let identifier = segue.identifier!
+        
+        switch identifier {
+        case "showRatingFromAddRestaurant":
+            let destinationController = segue.destination as! ReviewViewController
+            destinationController.segueFromController = "AddRestaurantController"
+        default:
+            break
         }
     }
     

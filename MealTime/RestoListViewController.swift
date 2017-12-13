@@ -16,18 +16,24 @@ import AlamofireImage
 class RestoListViewController: UITableViewController
 {
     
+    //UI Elements
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var refreshController: UIRefreshControl!
-    var searchController: UISearchController!
     
     
     //Properties
     var restaurantList: [Restaurant] = []
     var restaurant: Restaurant!
     
+    var isSearching = false
+    
     
     //Using Firebas
     var restaurantListFromFirebase: [RestaurantModel] = []
     var restaurantFIR: RestaurantModel?
+    
+    var filteredRestaurantListFromFirebase: [RestaurantModel] = []
     
     
     var searchResult: [Restaurant] = []
@@ -39,12 +45,10 @@ class RestoListViewController: UITableViewController
         self.title = "Restaurnts"
         navigationController?.navigationBar.backgroundColor = UIColor.darkGray
         
-        //Prepearing Search bar
-        searchController = UISearchController(searchResultsController: nil)
-        tableView.tableHeaderView = searchController.searchBar
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
-        
+        //Search Bar
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        searchBar.returnKeyType = .done
         
         //refresh table view
         refreshController = UIRefreshControl()
@@ -170,7 +174,7 @@ extension RestoListViewController
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         print(restaurantList.count)
-        return searchController.isActive ? searchResult.count : restaurantListFromFirebase.count
+        return isSearching ? filteredRestaurantListFromFirebase.count :  restaurantListFromFirebase.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -180,7 +184,7 @@ extension RestoListViewController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 //        self.restaurant = restaurantList[indexPath.row]
-        self.restaurantFIR = restaurantListFromFirebase[indexPath.row]
+        self.restaurantFIR = isSearching ? filteredRestaurantListFromFirebase[indexPath.row] : restaurantListFromFirebase[indexPath.row]
         self.performSegue(withIdentifier: "showRestoDetail", sender: self)
     }
     
@@ -191,7 +195,7 @@ extension RestoListViewController
         //Create and prepare cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestoLIstItemCell", for: indexPath) as! RestoListItemCell
         
-        let restaurant = restaurantListFromFirebase[indexPath.row]
+        let restaurant = isSearching ? filteredRestaurantListFromFirebase[indexPath.row] : restaurantListFromFirebase[indexPath.row]
         
         cell.restoNameLbl.text = restaurant.name
         cell.restoLocationLbl.text = restaurant.location
@@ -210,18 +214,25 @@ extension RestoListViewController
             }
         }
         
-        
-        
         return cell
     }
 }
 
-extension RestoListViewController: UISearchResultsUpdating
+extension RestoListViewController: UISearchBarDelegate
 {
-    func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text{
-            filterContent(for: searchText)
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchBar.text == nil || searchBar.text == "" {
+            isSearching = false
+            view.endEditing(true)
+            tableView.reloadData()
+        } else {
+            isSearching = true
+            filteredRestaurantListFromFirebase = restaurantListFromFirebase.filter{$0.name.contains(searchBar.text!)}
+            print(filteredRestaurantListFromFirebase)
+            searchBar.endEditing(true)
             tableView.reloadData()
         }
     }
 }
+
