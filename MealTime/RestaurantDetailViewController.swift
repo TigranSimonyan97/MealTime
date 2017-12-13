@@ -32,15 +32,15 @@ class RestaurantDetailViewController: UIViewController
         }
     }
     
-    var restaurantImageDataForMApAnnotation: UIImage?
+    var restaurantImageDataForMapAnnotation: UIImage?
     
     let regionRadius: CLLocationDistance = 1000
-    var initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
+    var initialLocation = CLLocation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.title = restaurant.name
+        self.title = restaurantFIR.name
         self.navigationController?.navigationBar.tintColor = UIColor.black
 //        restoPhotoImg.image = UIImage(data: (restaurant.image as Data?)!)
         
@@ -59,7 +59,7 @@ class RestaurantDetailViewController: UIViewController
                     self.restoPhotoImg.image = UIImage(data: imageData)
                     self.spinner.stopAnimating()
                     if let image = self.restoPhotoImg.image {
-                        self.restaurantImageDataForMApAnnotation = image
+                        self.restaurantImageDataForMapAnnotation = image
                     }
                 }
             }
@@ -73,7 +73,7 @@ class RestaurantDetailViewController: UIViewController
         
         //Set location
         let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString("30 Abovyan str., Yerevan", completionHandler: {placemarks,error in
+        geoCoder.geocodeAddressString(restaurantFIR.location, completionHandler: {placemarks,error in
             if error != nil{
                 let alert = UIAlertController(title: "Missing Location", message: "Sorry,but we can`t find restaurant location :(", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -94,7 +94,7 @@ class RestaurantDetailViewController: UIViewController
                         self.mapView.addAnnotation(annotation)
                         
                         //Set zoom level
-                        let region = MKCoordinateRegionMakeWithDistance(annotation.coordinate, 2500, 2500)
+                        let region = MKCoordinateRegionMakeWithDistance(annotation.coordinate, 500, 500)
                         self.mapView.setRegion(region, animated: true)
                         
                         self.initialLocation = location
@@ -113,7 +113,8 @@ class RestaurantDetailViewController: UIViewController
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(animated)
         
         if let rat = ratingFromReview {
@@ -155,7 +156,7 @@ class RestaurantDetailViewController: UIViewController
             ratingCount = ratingCount + Double(value)
         }
         
-        return (ratingSum / ratingCount, Int(ratingCount))
+        return (Double(round(10*(ratingSum / ratingCount))/10), Int(ratingCount))
     }
     
     func starCount(_ key: String) -> Double {
@@ -207,27 +208,8 @@ class RestaurantDetailViewController: UIViewController
         restaurantRating = segue.identifier
         print("restaurantRating from detail \(restaurantRating)")
         UserDefaults.standard.set(true, forKey: "UserRateRestaurant_\(restaurantFIR.id)")
+        restoInfoTableView.reloadData()
         setRateButtonState()
-    }
-    
-    @IBAction func ratingButtonTapped(segue: UIStoryboardSegue){
-        
-//        restaurant.isVisited = true
-//        
-//        if let rating = segue.identifier{
-//            switch rating {
-//            case "great":
-//                restaurant.rating = "Absolutely love it! Must try."
-//            case "good":
-//                restaurant.rating = "Pretty good."
-//            case "dislike":
-//                restaurant.rating = "I don`t like it."
-//            default:
-//                break
-//            }
-//        }
-//        print(restaurant.rating)
-//        restoInfoTableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

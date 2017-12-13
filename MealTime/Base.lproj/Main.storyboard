@@ -20,14 +20,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="WpR-lN-FC8">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RestoLIstItemCell" rowHeight="230" id="34F-3q-W6H" customClass="RestoListItemCell" customModule="MealTime" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="230"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="230"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="34F-3q-W6H" id="T0O-hc-v7D">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
@@ -37,19 +32,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="xFt-4X-fPq">
-                                            <rect key="frame" x="108" y="68" width="159" height="34.5"/>
+                                            <rect key="frame" x="88" y="68" width="199" height="34.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="SwH-pL-m5C">
-                                            <rect key="frame" x="107.5" y="110.5" width="159" height="27.5"/>
+                                            <rect key="frame" x="87.5" y="110.5" width="199" height="27.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="X7f-ed-kfo">
-                                            <rect key="frame" x="107.5" y="146" width="159" height="27.5"/>
+                                            <rect key="frame" x="87.5" y="146" width="199" height="27.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -67,10 +62,10 @@
                                         <constraint firstAttribute="trailing" secondItem="RV3-lw-b3b" secondAttribute="trailing" id="m9j-p7-4fR"/>
                                         <constraint firstItem="RV3-lw-b3b" firstAttribute="leading" secondItem="T0O-hc-v7D" secondAttribute="leading" id="nID-tk-cgB"/>
                                         <constraint firstItem="RV3-lw-b3b" firstAttribute="centerY" secondItem="T0O-hc-v7D" secondAttribute="centerY" id="o2g-fh-mKo"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="xFt-4X-fPq" secondAttribute="trailing" constant="100" id="pKw-ey-X2s"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="xFt-4X-fPq" secondAttribute="trailing" constant="80" id="pKw-ey-X2s"/>
                                         <constraint firstItem="xFt-4X-fPq" firstAttribute="top" secondItem="T0O-hc-v7D" secondAttribute="topMargin" constant="60" id="tUm-R9-NG6"/>
                                         <constraint firstItem="SwH-pL-m5C" firstAttribute="width" secondItem="xFt-4X-fPq" secondAttribute="width" id="uxm-Pg-Y9Y"/>
-                                        <constraint firstItem="xFt-4X-fPq" firstAttribute="leading" secondItem="T0O-hc-v7D" secondAttribute="leadingMargin" constant="100" id="xt6-Vv-J4B"/>
+                                        <constraint firstItem="xFt-4X-fPq" firstAttribute="leading" secondItem="T0O-hc-v7D" secondAttribute="leadingMargin" constant="80" id="xt6-Vv-J4B"/>
                                         <constraint firstItem="RV3-lw-b3b" firstAttribute="top" secondItem="T0O-hc-v7D" secondAttribute="top" id="y30-Zc-l1e"/>
                                         <constraint firstItem="X7f-ed-kfo" firstAttribute="width" secondItem="SwH-pL-m5C" secondAttribute="width" id="zSY-DN-V9H"/>
                                     </constraints>
@@ -96,7 +91,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchBar" destination="WpR-lN-FC8" id="eV4-BF-jVu"/>
                         <segue destination="HXS-mK-1am" kind="show" identifier="showRestoDetail" id="GiR-RB-UzU"/>
                     </connections>
                 </tableViewController>
@@ -302,7 +296,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jwU-3c-BeD">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="34O-xP-7iC" kind="unwind" unwindAction="backToHomePageWithSegue:" id="Ywr-Zw-28G"/>
+                                <segue destination="34O-xP-7iC" kind="unwind" unwindAction="backToHomePageWithSegue:" id="xsI-Et-1Cx"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="zcb-R7-Ds6">
@@ -358,7 +352,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="15i-7s-95a">
                                 <rect key="frame" x="0.0" y="331" width="375" height="336"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mapView key="tableFooterView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="0kU-DC-BjL">
+                                <mapView key="tableFooterView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" showsCompass="NO" id="0kU-DC-BjL">
                                     <rect key="frame" x="0.0" y="76" width="375" height="137"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </mapView>
@@ -376,7 +370,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ws-TB-2At">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ws-TB-2At">
                                                     <rect key="frame" x="118" y="12" width="244" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>

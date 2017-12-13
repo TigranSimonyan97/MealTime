@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MealTime/RestoListViewController.swift"
-            timestampString = "534832774.639423"
+            timestampString = "534879355.811097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
             landmarkName = "RestoListViewController"
             landmarkType = "3">
             <Locations>
@@ -119,11 +119,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MealTime/RestaurantDetailViewController.swift"
-            timestampString = "534830312.163854"
+            timestampString = "534883060.761007"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -135,11 +135,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MealTime/RestaurantDetailViewController.swift"
-            timestampString = "534830340.114226"
+            timestampString = "534883060.761007"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
             landmarkName = "RestaurantDetailViewController"
             landmarkType = "4">
          </BreakpointContent>

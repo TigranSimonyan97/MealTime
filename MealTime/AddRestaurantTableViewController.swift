@@ -136,7 +136,7 @@ class AddRestaurantTableViewController: UITableViewController
             
             
             //Upload restaurant image to FirebaseStorage
-            let  storageRef = Storage.storage().reference().child("\(restaurantName)image.png")
+            let  storageRef = Storage.storage().reference().child("\(restaurantName.replacingOccurrences(of: " ", with: ""))image.png")
             
             if let restaurantImage = chosenPhotoImageView.image {
                 if let uploadedData = UIImagePNGRepresentation(restaurantImage) {
